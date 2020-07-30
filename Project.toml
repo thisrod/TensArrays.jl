@@ -1,0 +1,4 @@
+name = "TensArrays"
+uuid = "70eefb7d-4b42-471c-acf6-aaa17e297c50"
+authors = ["Rodney Polkinghorne <rpolkinghorne@swin.edu.au>"]
+version = "0.1.0"
