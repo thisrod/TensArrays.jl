@@ -27,13 +27,13 @@ struct TensArray{T,N} <: AbstractArray{T,N}
     end
 end
 
-function match_shape(as, cs, rs)
-    cs = isempty(cs) ? (1,) : cs
-    rs = isempty(rs) ? (1,) : rs
-    as = cumprod(collect(as))
-    as[end] == prod(cs)*prod(rs) &&
-        prod(cs) in as &&
-        issubseq(as, cumprod([cs..., rs...]))
+# 1D TensArray can be a matrix
+function match_shape(as::Dims, cs::Dims, rs::Dims)
+    cpas = cumprod([as...])
+    prod(as) == prod(cs)*prod(rs) &&
+        issubseq(cpas, cumprod([cs..., rs...])) &&
+        (as ≠ () || cs == rs == ()) &&
+        (cs == () || prod(cs) ∈ cpas)
 end
 
 function issubseq(xs, ys)
@@ -44,7 +44,7 @@ function issubseq(xs, ys)
     elseif first(xs) == first(ys)
         issubseq(xs[2:end], ys[2:end])
     else
-        issubseq(xs[2:end], ys)
+        issubseq(xs, ys[2:end])
     end
 end
 
