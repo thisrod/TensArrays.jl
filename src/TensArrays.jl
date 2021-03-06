@@ -57,6 +57,8 @@ Base.setindex!(x::TensArray, v, j) = (x.parent[j] = v)
 Base.similar(x::TensArray, T, dims) =
     TensArray(similar(parent(x), T, dims), x.cs, x.rs)
 
+# TODO show with rowsize and colsize
+
 # matmul
 
 function Base.:*(x::TensArray, y::TensArray)

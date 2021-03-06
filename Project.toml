@@ -4,4 +4,4 @@ authors = ["Rodney Polkinghorne <rpolkinghorne@swin.edu.au>"]
 version = "0.1.0"
 
 [compat]
-julia = 1
+julia = "1"
